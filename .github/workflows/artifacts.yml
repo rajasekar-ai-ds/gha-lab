@@ -16,7 +16,7 @@ jobs:
       
       - name: Running train.py
         run: python3 train.py
-        id: score
+#        id: score
       
       - name: Upload the model
         uses: actions/upload-artifact@v4
