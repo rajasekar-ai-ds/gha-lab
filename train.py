@@ -19,4 +19,5 @@ else:
 print("Small change 2")
 
 
-
+epochs = os.environ.get('EPOCHS', '5')
+print(f"Train for {epochs} epochs")
