@@ -9,13 +9,12 @@ with open("model.json", "w") as file:
 print("model.json is saved")
 
 try:
-	v = os.environ["GITHUB_OUTPUT"]
-	file2 = open(v, 'a')
+	path = os.environ["GITHUB_OUTPUT"]
 except KeyError:
-	print("ENV not found, Check your environment")
+	print("GITHUB_OUTPUT not set (local run) - skipping output")
 else:
-	file2.write(f"version={data['version']}\n")
-	file2.close()
+	with open(path, 'a') as f:
+		f.write(f"version={data['version']}\n")
 
 
 

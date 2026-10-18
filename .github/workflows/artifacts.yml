@@ -2,9 +2,9 @@ name: artifacts-lab
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   train:
     runs-on: ubuntu-latest
