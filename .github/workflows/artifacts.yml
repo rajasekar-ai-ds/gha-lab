@@ -5,8 +5,16 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      epochs:
+        description: "Number of training epochs"
+        required: true
+        default: "5"
+        type: string
 jobs:
   train:
+
     runs-on: ubuntu-latest
     outputs:
       model_version: ${{ steps.score.outputs.version }}
@@ -15,16 +23,17 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Running train.py
-        run: python3 train.py
         id: score
+        env:
+          EPOCHS: ${{ inputs.epochs }}
+        run: python3 train.py
       
       - name: Upload the model
         uses: actions/upload-artifact@v4
         with:
           name: model
           path: model.json
-#      - id: score
-#        run: python3 train.py
+
   build:
     runs-on: ubuntu-latest
     needs: train
