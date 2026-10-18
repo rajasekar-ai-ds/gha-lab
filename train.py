@@ -16,7 +16,7 @@ else:
 	with open(path, 'a') as f:
 		f.write(f"version={data['version']}\n")
 
-
+print("Small change")
 
 
 
