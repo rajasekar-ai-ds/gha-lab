@@ -16,8 +16,7 @@ else:
 	with open(path, 'a') as f:
 		f.write(f"version={data['version']}\n")
 
-print("Small change 2")
 
+epochs = int(os.environ.get('EPOCHS') or "5")
 
-epochs = os.environ.get('EPOCHS', '5')
 print(f"Train for {epochs} epochs")
