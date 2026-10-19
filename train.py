@@ -17,6 +17,6 @@ else:
 		f.write(f"version={data['version']}\n")
 
 
-epochs = int(os.environ.get('EPOCHS') or "5")
+epochs = int(os.environ.get('EPOCHS') or "3")
 
 print(f"Train for {epochs} epochs")
