@@ -22,12 +22,20 @@ jobs:
   train:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
     outputs:
       model_version: ${{ steps.score.outputs.version }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      
+
+      - name: Set-up Python
+        uses: actions/setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Running train.py
         id: score
         env:
