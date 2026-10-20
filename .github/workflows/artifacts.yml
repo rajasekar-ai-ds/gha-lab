@@ -45,7 +45,7 @@ jobs:
       - name: Upload the model
         uses: actions/upload-artifact@v4
         with:
-          name: model
+          name: model-${{ matrix.python-version }}
           path: model.json
 
   build:
@@ -55,9 +55,9 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: model
+          pattern: model-*
       - name: List the files
-        run: ls -la 
+        run: ls -R
       - name: Read the content of the model
         run: cat model.json
       - run: echo "Version is ${{ needs.train.outputs.model_version }}"
