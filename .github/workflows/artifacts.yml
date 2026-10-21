@@ -36,6 +36,16 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Cache pip downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-py${{ matrix.python-version }}-${{hashFiles('requirements.txt')}}
+          restore-keys: |
+            pip-${{ runner.os }}-py${{ matrix.python-version }}-
+
+      - name: Install Packages
+        run: python -m pip install -r requirements.txt
       - name: Running train.py
         id: score
         env:
