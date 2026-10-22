@@ -1,0 +1,56 @@
+name: if-lab.yml
+
+on:
+  workflow_dispatch:
+
+jobs:
+  step-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: A
+        run: echo "A ran"
+
+      - name: B
+        run: exit 1
+
+      - name: C
+        run: echo "C ran"
+
+      - name: D
+        if: failure()
+        run: echo "D ran"
+
+      - name: E
+        if: always()
+        run: echo "E ran"
+
+      - name: F
+        if: success()
+        run: echo "F ran"
+
+      - name: G
+        if: '!failure()'
+        run: echo "G ran"
+
+
+  report:
+    needs: step-lab
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Running on failure
+        run: echo "report ran"
+
+
+  deploy:
+    needs: step-lab
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/head/main'
+    steps:
+
+      - name: Ref is main
+        run: echo "deploy ran"
+
+
+
+
