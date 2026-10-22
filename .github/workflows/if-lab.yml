@@ -1,4 +1,4 @@
-name: if-lab.yml
+name: if-lab
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
         run: echo "A ran"
 
       - name: B
-        run: exit 1
+        run: exit 0
 
       - name: C
         run: echo "C ran"
@@ -29,7 +29,7 @@ jobs:
         run: echo "F ran"
 
       - name: G
-        if: '!failure()'
+        if: '!cancelled()'
         run: echo "G ran"
 
 
@@ -45,7 +45,7 @@ jobs:
   deploy:
     needs: step-lab
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/head/main'
+    if: github.ref == 'refs/heads/main'
     steps:
 
       - name: Ref is main
