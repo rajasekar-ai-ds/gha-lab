@@ -55,6 +55,8 @@ jobs:
   gate:
     runs-on: ubuntu-latest
     if: false
+    steps:
+      - run: echo "gate job skipped"
 
   after-gate:
     runs-on: ubuntu-latest
