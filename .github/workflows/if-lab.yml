@@ -11,7 +11,7 @@ jobs:
         run: echo "A ran"
 
       - name: B
-        run: exit 0
+        run: exit 1
 
       - name: C
         run: echo "C ran"
@@ -50,6 +50,26 @@ jobs:
 
       - name: Ref is main
         run: echo "deploy ran"
+
+
+  gate:
+    runs-on: ubuntu-latest
+    if: false
+
+  after-gate:
+    runs-on: ubuntu-latest
+    needs: gate
+
+    steps:
+      - run: echo "after-gate run"
+
+
+  after-gate-override:
+    runs-on: ubuntu-latest
+    needs: gate
+    if: '!cancelled()'
+    steps:
+      - run: echo "override ran"
 
 
 
