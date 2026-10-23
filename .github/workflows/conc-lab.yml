@@ -1,0 +1,20 @@
+name: conc-lab
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ci }}-{{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  slow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: sleep 60
+
+      - run: echo "run ${{ github.run_number }}"
+
+
+
+
